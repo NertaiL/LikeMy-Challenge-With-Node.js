@@ -1,4 +1,5 @@
-import { getPosts, createPost } from "../models/postModels.js";
+import { getPosts, createPost, updatePost, deletePost } from "../models/postModels.js";
+
 
 //get posts
 export const getAllPosts = async (req, res) => {
@@ -10,6 +11,7 @@ export const getAllPosts = async (req, res) => {
     console.error("Error processing request", error);
   }
 };
+
 
 //posts create
 export const createPosts = async (req, res) => {
@@ -49,7 +51,34 @@ export const createPosts = async (req, res) => {
 };
 
 
-export const notFound = async (req, res) => {
+//put
+export const updateLikes = async (req,res) =>{
+try {
+  const{id} = req.params;
+  const {like} = req.body
+  const newUpdate = await updatePost(id,like)
+  res.status(201).json(newUpdate)
+} catch (error) {
+  res.status(500).json({ error: "Error processing request" });
+  console.error("Error processing request:", error);
+}
+}
+
+//delete
+export const removePost = async (req,res) =>{
+  try {
+    const {id} = req.params
+    const newRemovePost = await deletePost(id)
+    res.status(204).json(newRemovePost)
+  } catch (error) {
+    res.status(500).json({ error: "Error processing request" });
+  console.error("Error processing request:", error);
+  }
+}
+
+
+
+/* export const notFound = async (req, res) => {
   res.status(500).json({ error: "This request is not possible" });
   console.error("This request is not possible", error);
-};
+}; */

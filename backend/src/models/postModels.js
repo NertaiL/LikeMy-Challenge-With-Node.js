@@ -24,3 +24,31 @@ export const createPost = async (titulo, url, descripcion) => {
     console.log(error);
   }
 };
+
+//put
+export const updatePost = async (id) =>{
+  try {
+    const SQLquery ={
+      text: "UPDATE posts SET likes = likes + 1 WHERE id = $1",
+      values: [id]
+    }
+    const response = await pool.query(SQLquery);
+    return response.rows
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//delete
+export const deletePost = async (id) =>{
+  try {
+    const SQLquery={
+      text: "DELETE FROM posts WHERE id = $1",
+      values: [id]
+    }
+    const response = await pool.query(SQLquery)
+    return response.rows
+  } catch (error) {
+    console.log(error);
+  }
+}
