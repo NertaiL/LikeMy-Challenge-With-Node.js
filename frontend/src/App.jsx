@@ -12,25 +12,25 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
-    const { data: posts } = await axios.get(urlBaseServer + "/posts");
+    const { data: posts } = await axios.get(urlBaseServer + "/api/v1/posts");
     setPosts([...posts]);
   };
 
   const agregarPost = async () => {
     const post = { titulo, url: imgSrc, descripcion };
-    await axios.post(urlBaseServer + "/posts", post);
+    await axios.post(urlBaseServer + "/api/v1/posts", post);
     getPosts();
   };
 
   // este método se utilizará en el siguiente desafío
   const like = async (id) => {
-    await axios.put(urlBaseServer + `/posts/like/${id}`);
+    await axios.put(urlBaseServer + `/api/v1/posts/like/${id}`);
     getPosts();
   };
 
   // este método se utilizará en el siguiente desafío
   const eliminarPost = async (id) => {
-    await axios.delete(urlBaseServer + `/posts/${id}`);
+    await axios.delete(urlBaseServer + `/api/v1/posts/${id}`);
     getPosts();
   };
 

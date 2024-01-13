@@ -14,6 +14,7 @@ const pool = new pg.Pool({ //pero como aca llamamos ala libreria pg entonces ext
 
 export default pool;
 
+// esto es para cuando la base de dato se ejecute
 try {
     await pool.query("SELECT NOW()"); //SELECT NOW() ES PARA DEJAR REGISTRADO A QUE HORA SE REALIZO LA CONSULTA EN POSTGRES
     console.log("Database connected"); // Y BUENO ESTO ES PARA VER QUE LA DATABASE ESTE CONECTADA
@@ -21,7 +22,7 @@ try {
     console.error("Error connecting to database:", error);
 }
 
-//pool.on("connect", () => console.log("✔ DB connected"));
+//pool.on("connect", () => console.log("✔ DB connected")); esto es solamente para cuando la base de datos se ejecuta
 
 
 
